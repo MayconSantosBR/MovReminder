@@ -1,0 +1,43 @@
+﻿@using MovReminder.Data.Entities;
+@{
+    var movies = ViewData["Movies"] as List<Movie>;
+    var directors = ViewData["Directors"] as List<Director>;
+}
+
+<div class="position-relative">
+
+    <p class="fs-2">Cadastrar filme assistido</p>
+
+</div>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+<form class="row g-3">
+    <div class="col-md-6">
+        <label for="movieName" class="form-label">Nome do Filme (Caso já esteja cadastrado)</label>
+        <select class="form-control" name="movie" id="movie">
+            @{
+                foreach(var movie in movies)
+                {
+                    <option value = "@movie.IdMovie">@movie.Name</option>
+                }
+            }
+    </div>
+    <div class="col-md-9">
+        <label for="dataView" class="form-label">Data de visualização</label>
+        <input type="date" class="form-control" name="dataView" id="dataView">
+    </div>
+    <div class="col-md-9">
+        <label for="feedback" class="form-label">Gostou?</label>
+        <select class="form-control" name="feedback" id="feedback">
+            <option value="true">Sim</option>
+            <option value="false">Não</option>
+        </select>
+    </div>
+    <div class="col-md-10">
+        <button type="submit" class="btn btn-primary" asp-controller="Register" asp-action="CreateWatchedMovie" asp-route-movie="movie" asp-route-dataView="dataView" asp-route-feedback="feedback">Cadastrar</button>
+    </div>
+</form>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
